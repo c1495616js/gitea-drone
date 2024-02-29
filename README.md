@@ -1,5 +1,8 @@
-# drone-gitea-on-docker
-DroneCI and Gitea on Docker
+# Gitea + Drone + docker-compose
+
+## Credit to 
+
+https://github.com/ruanbekker/drone-gitea-on-docker
 
 ## Usage
 
