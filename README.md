@@ -13,10 +13,11 @@ GITEA_ADMIN_USER="giteauser" -> will be the user you register with in drone
 Now boot the stack:
 
 ```
-$ bash boot.sh
+$ sh boot.sh
 ```
+- Head over to: `http://${IP_ADDRESS}:3000 and click install gitea with existing configuration.
 
-*Note*: Theres a [current issue](https://github.com/go-gitea/gitea/issues/7702) where webhooks get fired twice, if you see that just restart gitea with `docker restart gitea`.
+- Register an account in gitea.
 
 - Head over to: `http://${IP_ADDRESS}:3000/user/settings/applications` and create a new OAuth2 Application and set the Redirect URI to `http://${IP_ADDRESS}:3001/login`
 
@@ -24,33 +25,14 @@ $ bash boot.sh
 
 - Now when you head over to `http://${IP_ADDRESS}:3001/` you will be asked to authorize the application and you should be able to access drone.
 
-## Drone CLI
-
-Install Drone CLI:
-- https://docs.drone.io/cli/install/
-
-```
-$ curl -L https://github.com/drone/drone-cli/releases/latest/download/drone_darwin_amd64.tar.gz | tar zx
-$ sudo mv drone /usr/local/bin/drone
-$ chmod +x /usr/local/bin/drone
-```
-
-Get your Drone Token:
-- http://${IP_ADDRESS}:3001/account
-
-```
-$ export DRONE_SERVER=http://${IP_ADDRESS}:3001
-$ export DRONE_TOKEN=one-from-the-account-page
-drone info
-```
 
 ## Build your first pipeline
 
 Create a test repo in gitea:
 
-![image](https://user-images.githubusercontent.com/567298/110296470-0ad23800-7ffb-11eb-8428-af49d0ebd62d.png)
+![CleanShot 2024-02-29 at 10 45 18@2x](https://github.com/c1495616js/gitea-drone/assets/31360789/a1f11af2-a6a7-410e-90ee-bf8d7ece8164)
 
-Commit a `.drone.yml` file for drone:
+See the `example` folder and Commit a `.drone.yml` file for drone:
 
 ```
 $ cat .drone.yml
@@ -73,15 +55,16 @@ steps:
 
 Head over to drone and sync your repositories:
 
-![image](https://user-images.githubusercontent.com/567298/110296425-00b03980-7ffb-11eb-9216-76725a62c09e.png)
+![CleanShot 2024-02-29 at 10 47 28@2x](https://github.com/c1495616js/gitea-drone/assets/31360789/97c41a23-4aeb-4bdf-9019-c2ff29baa9c4)
 
 Activate your repository:
 
-![image](https://user-images.githubusercontent.com/567298/110296623-3523f580-7ffb-11eb-805f-db5db4dab0cb.png)
+![CleanShot 2024-02-29 at 10 48 04@2x](https://github.com/c1495616js/gitea-drone/assets/31360789/d738d2c7-f9fd-4061-9b93-de8783fd4658)
+
 
 Push a commit to master and see your pipeline running:
 
-![image](https://user-images.githubusercontent.com/567298/110296747-584ea500-7ffb-11eb-9909-259641a663aa.png)
+![CleanShot 2024-02-29 at 10 49 19@2x](https://github.com/c1495616js/gitea-drone/assets/31360789/7938eac2-ce8f-4c5c-9503-7fe915bd7930)
 
 ## More Examples
 
